@@ -1,18 +1,19 @@
 package models;
 
+import Enums.UserRole;
 import Enums.UserStatus;
 
 public class User {
 	private String name;
-	private Integer Id;
+	private Integer id;
 	private UserStatus status;
 	private Boolean isInDebt;
+	private UserRole role;
 
-	public User(String name, Integer Id, UserStatus status, Boolean isInDebt) {
-		this.name = name;
-		this.Id = Id;
-		this.status = status;
-		this.isInDebt = isInDebt;
+	public User(UserRole role) {
+		this.role = role;
+		this.status = UserStatus.ACTIVE;
+		this.isInDebt = false;
 	}
 
 	public String getName() {
@@ -20,7 +21,7 @@ public class User {
 	}
 
 	public Integer getId() {
-		return this.Id;
+		return this.id;
 	}
 
 	public UserStatus getStatus() {
@@ -30,9 +31,17 @@ public class User {
 	public Boolean getIsInDebt() {
 		return this.isInDebt;
 	}
+	
+	public UserRole getRole() {
+		return this.role;
+	}
 
 	public void setName(String newName) {
 		this.name = newName;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;	
 	}
 
 	public void inactiveUser() {

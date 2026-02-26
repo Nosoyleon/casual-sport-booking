@@ -1,0 +1,2 @@
+10,leon1,ACTIVE,false,PLAYER
+20,leon2,ACTIVE,false,PLAYER

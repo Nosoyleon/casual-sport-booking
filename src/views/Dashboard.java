@@ -1,6 +1,7 @@
 package views;
 
 import java.util.Scanner;
+import controllers.UserActions;
 
 public class Dashboard {
 
@@ -31,15 +32,18 @@ public class Dashboard {
 			case 0:
 				System.out.println("Adios!");
 				break;
-
+			case 1:
+				UserActions.addUser(scanner);
+				break;
+				
+			case 2:
+				UserActions.listUsers();
+				break;
 			default:
 				System.out.println("Opción no válida.");
 				System.out.println("");
 				break;
 			}
-
-			System.out.println("Dijistaste:" + userInput);
-			System.out.println("");
 
 		} while (userInput != 0);
 		scanner.close();
