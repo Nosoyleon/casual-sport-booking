@@ -1,13 +1,13 @@
 package controllers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import models.User;
+import sequentialFile.ReadSequantialFile;
 
 public class UserActions {
 	public static void addUser(Scanner scanner) {
@@ -35,36 +35,31 @@ public class UserActions {
 
 	public static void listUsers() {
 
-	    try (BufferedReader br = new BufferedReader(new FileReader("users.txt"))) {
+		System.out.println("\n==================== LISTA DE USUARIOS ====================");
+		System.out.println("");
 
-	        String line;
+		ArrayList<String> fileLines = ReadSequantialFile.readLines("users.txt");
+		// Encabezado
+		System.out.printf("%-10s %-20s %-12s %-10s %-12s%n", "ID", "NOMBRE", "STATUS", "DEUDA", "ROL");
 
-	        System.out.println("\n==================== LISTA DE USUARIOS ====================");
-	        System.out.println("");
+		System.out.println("------------------------------------------------------------");
 
-	        // Encabezado
-	        System.out.printf("%-10s %-20s %-12s %-10s %-12s%n",
-	                "ID", "NOMBRE", "STATUS", "DEUDA", "ROL");
+		int i = 0;
 
-	        System.out.println("------------------------------------------------------------");
+		while (i < fileLines.size()) {
 
-	        while ((line = br.readLine()) != null) {
+			String[] data = fileLines.get(i).split(",");
 
-	            String[] data = line.split(",");
+			System.out.printf("%-10s %-20s %-12s %-10s %-12s%n", data[0], // id
+					data[1], // nombre
+					data[2], // status
+					data[3], // deuda
+					data[4] // rol
+			);
+			i++;
+		}
 
-	            System.out.printf("%-10s %-20s %-12s %-10s %-12s%n",
-	                    data[0],  // id
-	                    data[1],  // nombre
-	                    data[2],  // status
-	                    data[3],  // deuda
-	                    data[4]   // rol
-	            );
-	        }
+		System.out.println("============================================================\n");
 
-	        System.out.println("============================================================\n");
-
-	    } catch (IOException e) {
-	        System.out.println("No hay usuarios registrados o ocurrió un error.");
-	    }
 	}
 }
